@@ -1,4 +1,4 @@
-package co.udu.uceva.semestreservice.controllers;
+package co.edu.uceva.semestreservice.controllers;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,8 +9,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import co.udu.uceva.semestreservice.model.entities.Semestre;
-import co.udu.uceva.semestreservice.model.services.ISemestreService;
+import co.edu.uceva.semestreservice.model.entities.Semestre;
+import co.edu.uceva.semestreservice.model.services.ISemestreService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

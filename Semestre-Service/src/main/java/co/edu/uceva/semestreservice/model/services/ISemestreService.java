@@ -1,10 +1,8 @@
-package co.udu.uceva.semestreservice.model.services;
+package co.edu.uceva.semestreservice.model.services;
 
-
-import co.udu.uceva.semestreservice.model.entities.Semestre;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
+import co.edu.uceva.semestreservice.model.entities.Semestre;
 import java.util.List;
 
 public interface ISemestreService {

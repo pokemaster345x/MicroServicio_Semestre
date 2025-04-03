@@ -1,4 +1,4 @@
-package co.udu.uceva.semestreservice.model.entities;
+package co.edu.uceva.semestreservice.model.entities;
 
 
 import jakarta.persistence.Entity;
