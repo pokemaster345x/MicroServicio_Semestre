@@ -1,9 +1,6 @@
 package co.edu.uceva.semestreservice.controllers;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
@@ -11,6 +8,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import co.edu.uceva.semestreservice.model.entities.Semestre;
 import co.edu.uceva.semestreservice.model.services.ISemestreService;
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -78,13 +77,21 @@ public class SemestreRestController {
         }
     }
     /**
-     * Crear un nuevo producto pasando el objeto en el cuerpo de la petición.
+     * Crear un nuevo producto pasando el objeto en el cuerpo de la petición, usando validaciones
      */
 
     @PostMapping("/semestres")
-
-    public ResponseEntity<Map<String ,Object>> save(@RequestBody Semestre semestre){
+    public ResponseEntity<Map<String ,Object>> save(@Valid @RequestBody Semestre semestre,BindingResult result){
         Map<String,Object> response=new HashMap<>();
+        if(result.hasErrors()){
+            List<String> errors=result.getFieldErrors()
+                    .stream()
+                    .map(err -> "El campo '" + err.getField() + "' " + err.getDefaultMessage())
+                    .toList();
+
+            response.put("errors", errors);
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
         try{
             Semestre nuevoSemestre=semestreService.save(semestre);
             response.put(MENSAJE,"El producto ha sido creado con éxito");
@@ -120,8 +127,18 @@ public class SemestreRestController {
     }
 
     @PutMapping("/semestres")
-    public ResponseEntity<Map<String ,Object>> update(@RequestBody Semestre semestre){
+    public ResponseEntity<Map<String ,Object>> update(@Valid @RequestBody Semestre semestre, BindingResult result){
         Map<String,Object> response=new HashMap<>();
+
+        if(result.hasErrors()){
+            List<String> errors=result.getFieldErrors()
+                    .stream()
+                    .map(err -> "El campo '" + err.getField() + "' " + err.getDefaultMessage())
+                    .toList();
+
+            response.put("errors", errors);
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
         try {
             //verifica si el semestre existe antes de actualizar
             if(semestreService.findById(semestre.getId())==null){
