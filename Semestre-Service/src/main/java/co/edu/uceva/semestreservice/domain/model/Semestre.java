@@ -1,4 +1,4 @@
-package co.edu.uceva.semestreservice.model.entities;
+package co.edu.uceva.semestreservice.domain.model;
 
 
 

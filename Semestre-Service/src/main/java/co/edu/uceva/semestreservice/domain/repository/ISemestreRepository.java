@@ -1,6 +1,6 @@
-package co.edu.uceva.semestreservice.model.repositories;
+package co.edu.uceva.semestreservice.domain.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import co.edu.uceva.semestreservice.model.entities.Semestre;
+import co.edu.uceva.semestreservice.domain.model.Semestre;
 public interface ISemestreRepository extends JpaRepository<Semestre, Long> {
 }

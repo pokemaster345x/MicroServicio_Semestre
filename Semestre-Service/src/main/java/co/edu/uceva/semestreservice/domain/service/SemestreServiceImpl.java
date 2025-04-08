@@ -1,12 +1,13 @@
-package co.edu.uceva.semestreservice.model.services;
+package co.edu.uceva.semestreservice.domain.service;
 
-import co.edu.uceva.semestreservice.model.entities.Semestre;
-import co.edu.uceva.semestreservice.model.repositories.ISemestreRepository;
+import co.edu.uceva.semestreservice.domain.model.Semestre;
+import co.edu.uceva.semestreservice.domain.repository.ISemestreRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -30,8 +31,8 @@ public class SemestreServiceImpl implements ISemestreService {
     }
     @Override
     @Transactional(readOnly = true)
-    public Semestre findById(long id) {
-        return semestreRepository.findById(id).orElse(null);
+    public Optional<Semestre> findById(long id) {
+        return semestreRepository.findById(id);
     }
     @Override
     @Transactional
@@ -41,7 +42,7 @@ public class SemestreServiceImpl implements ISemestreService {
     @Override
     @Transactional(readOnly = true)
     public List<Semestre> findAll(){
-        return (List<Semestre>) semestreRepository.findAll();
+        return semestreRepository.findAll();
     }
     @Override
     @Transactional(readOnly = true)
